@@ -1,10 +1,12 @@
 #Bitmap如何压缩
 
 ##Bitmap.compress()
-质量压缩：
+质量压缩，不会对内存产生影响：
 它是在保持像素的前提下改变图片的位深及透明度等，来达到压缩图片的目的，不会减少图片的像素。进过它压缩的图片文件大小会变小，但是解码成bitmap后占得内存是不变的。
 
 ##BitmapFactory.Options.inSampleSize
+内存压缩
+
 ```
 public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
         int reqWidth, int reqHeight) {
