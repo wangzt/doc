@@ -1,5 +1,8 @@
 #MAT内存检测
 
+Android Studio导出的hprof文件，需要转换后才可以被MAT使用
+转换命令 hprof-conv source.hprof dest.prof
+
 ##Retained Heap
 Retained size是该对象自己的shallow size，加上从该对象能直接或间接访问到对象的shallow size之和。换句话说，retained size是该对象被GC之后所能回收到内存的总和。
 相对于shallow heap，RetainedHeap可以更精确的反映一个对象实际占用的大小
