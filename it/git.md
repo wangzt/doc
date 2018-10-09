@@ -9,3 +9,9 @@ Host github.com
     PreferredAuthentications publickey
     User username1
 ```
+
+##删除远程分支
+git push origin  :branch_name
+
+##远程仓库已经不存在的分支，本地无法删除，可以使用以下命令
+git remote prune origin
