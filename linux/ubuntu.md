@@ -35,3 +35,6 @@ $ ln -sv libXXX.so.1 libXXX.so
 2。检查/etc/ld.so.conf中的库文件路径是否正确，如果库文件不是使用系统路径，/usr/lib, /usr/local/lib, 那么必须在文件中加入。
 
 3。ldconfig 重建ld.so.cache文件，ld的库文件检索目录存放文件。尤其刚刚编译安装的软件，必须运行ldconfig，才能将新安装的库文件导入ld.so.cache
+
+##ubuntu 下没有pthread库以及报undefined reference to 'pthread_create'的解决方法
+只要在makefile最后面加上-lpthread就可以了,而且在redhat5中-lpthread可以加在-Wall的后面，但是在Ubuntu下必须加在最后才行
