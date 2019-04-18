@@ -20,7 +20,7 @@ root      1503     1  0 Jan1 ?        00:00:00 nginx: master process 
 
 返回结果
 
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+>nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 3.启动nginx服务
@@ -45,3 +45,6 @@ sudo firewall-cmd --add-port=80/tcp --permanent
 
 4. 然后重启防火墙
 >sudo firewall-cmd --reload
+
+5. 在其他机器判断端口是否可访问
+>telnet 目标ip 目标端口
