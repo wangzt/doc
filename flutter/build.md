@@ -4,9 +4,13 @@
 
 1. 安装新版本git，>2.13
 2. 安装openjdk，>=1.8
-3. 国内最好配置较快的源,
+3. 国内最好配置较快的源,但是有些包不全，如果有问题，可以去掉，继续使用官方的
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
+临时去掉
+unset PUB_HOSTED_URL
+unset FLUTTER_STORAGE_BASE_URL
 
 ## 下载安装Flutter SDK
 
@@ -32,6 +36,20 @@ fatal: 不是一个 git 仓库（或者任何父目录）：.git
 方法：使用 `flutter packages -v pub get -v` 检查具体问题原因
 一般有两种原因：flutter权限问题，flutter缓存问题（清理 `~/.pub-cache`即可）
 
-2. 安卓flutter混合项目，可能会有gradle相关资源下载失败，可参考安卓端gradle相关问题处理
+3. 安卓flutter混合项目，可能会有gradle相关资源下载失败，可参考安卓端gradle相关问题处理
+更换阿里云的源可能会好
+maven {url 'https://maven.aliyun.com/repository/public'}
+maven {url 'https://maven.aliyun.com/repository/central'}
+maven {url 'https://maven.aliyun.com/repository/gradle-plugin'}
+maven {url 'https://maven.aliyun.com/repository/google'}
+maven {url 'https://maven.aliyun.com/repository/jcenter'}
 
+4. 打release包失败
+先尝试`flutter build apk --debug` 看看是否debug包可以,如果可以，可能是lint检查的问题，可以在android/app下面的build.gradle里添加如下配置
+```
+lintOptions {
+    checkReleaseBuilds false
+    abortOnError false
+}
+```
 
