@@ -21,3 +21,7 @@ git reflog show --date=iso branch_name
 
 ##导出特定用户提交记录到csv
 git log --author=wangzhitao --date=iso --pretty=format:'"%ad","%s"' >log.csv
+
+##删除未追踪的文件
+git clean -df // 包括子文件
+git clean -f // 根文件
