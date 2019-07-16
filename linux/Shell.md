@@ -3,13 +3,13 @@
 ##Linux下怎样搜索文件
 使用linux系统难免会忘记文件所在的位置，可以使用以下命令对系统中的文件进行搜索。搜索文件的命令为”find“；”locate“；”whereis“；”which“；”type“
 
-1. linux下最强大的搜索命令为”find“。它的格式为”find <指定目录> <指定条件> <指定动作>“；比如使用find命令搜索在根目录下的所有interfaces文件所在位置，命令格式为”find / -name  'interfaces'“
+1. linux下最强大的搜索命令为”find“。它的格式为”find <指定目录> <指定条件> <指定动作>“；比如使用find命令搜索在根目录下的所有interfaces文件所在位置，命令格式为`find / -name  'interfaces'`
 
-2. 使用locate搜索linux系统中的文件，它比find命令快。因为它查询的是数据库(/var/lib/locatedb)，数据库包含本地所有的文件信息。使用locate命令在根目录下搜索interfaces文件的命令为”locate interfaces“
+2. 使用locate搜索linux系统中的文件，它比find命令快。因为它查询的是数据库(/var/lib/locatedb)，数据库包含本地所有的文件信息。使用locate命令在根目录下搜索interfaces文件的命令为`locate interfaces`
 
-3. 使用”whereis“命令可以搜索linux系统中的所有可执行文件即二进制文件。使用whereis命令搜索grep二进制文件的命令为”whereis grep“
+3. 使用”whereis“命令可以搜索linux系统中的所有可执行文件即二进制文件。使用whereis命令搜索grep二进制文件的命令为`whereis grep`
 
-4. 使用which命令查看系统命令是否存在，并返回系统命令所在的位置。使用which命令查看grep命令是否存在以及存在的目录的命令为”which grep“
+4. 使用which命令查看系统命令是否存在，并返回系统命令所在的位置。使用which命令查看grep命令是否存在以及存在的目录的命令为`which grep`
 
 5. 使用type命令查看系统中的某个命令是否为系统自带的命令。使用type命令查看cd命令是否为系统自带的命令；查看grep 是否为系统自带的命令
 
@@ -24,3 +24,29 @@
 
 1. sudo swapoff -a
 2. sudo swapon -a
+
+## 启动服务
+1. 启动服务：    systemctl start mysql
+2. 设置开机启动： systemctl enable mysql
+
+## ps配合awk杀死java进程
+```
+ps ef | grep java | awk '{print $2}' | xargs kill -9
+```
+
+## awk指定分隔符
+1. 指定冒号做分隔符, `awk -F: '{printf "%-20s %-20s %-20s\n",$1,$3,$6}' /etc/passwd`
+2. 指定多个分隔符， `awk -F[;:]`
+
+## awk正则匹配
+1. 匹配tcp `awk ~ /tcp/ || NR==2 {print NR,$4,$5,$6} OFS="\t" netstat.txt`
+2. 匹配tcp或http `awk '/tcp|http/' file.txt`
+3. 取反的例子 `awk !~ '/tcp/' file.txt` 或 `awk '!/tcp/' file.txt`
+
+## awk拆分文件
+按照第6列拆分文件
+`awk '/tcp/ {print $1, $2 > $6}' netstat.txt`
+
+## 打印99乘法表
+seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'
+
